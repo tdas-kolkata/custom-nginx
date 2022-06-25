@@ -1,0 +1,47 @@
+version: "3.8"
+services:
+  backend:
+    build: ./vidscoin-api-backend/.
+    ports:
+      - 8000:3000
+    volumes:
+      - /var/uploads:/app/public/uploads
+    restart: unless-stopped
+    container_name: backend_container
+
+
+  frontend:
+    build: ./vidscoin-react/.
+    ports: 
+      - 3000:3000
+    restart: unless-stopped
+    container_name: frontend_container
+
+  nginx:
+    build: ./custom-nginx/.
+    ports:
+      - 80:80
+    volumes:
+      - /home/dev2/custom-nginx/conf:/etc/nginx/conf.d
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - frontend
+      - backend
+    restart: unless-stopped
+    container_name: nginx_container
+
+    # # This is the backend server
+    # location /api/ {
+    #     proxy_pass http://host.docker.internal:8000/;
+    # }
+    
+    # # This is the frontend server for regular users
+    # location / {
+    #     proxy_pass http://host.docker.internal:3000/;
+    # }
+
+    # # This is the fronteend server for admin
+    # location /admin_ui/ {
+    #     proxy_pass http://host.docker.internal:5000/;
+    # }
