@@ -10,13 +10,6 @@ services:
     container_name: backend_container
 
 
-  frontend_admin:
-    build: ./vidscoin-react/.
-    ports: 
-      - 4000:3000
-    restart: unless-stopped
-    container_name: frontend_admin_container
-
   frontend_user:
     build: ./Vidscoin/.
     ports:
@@ -38,18 +31,3 @@ services:
       - backend
     restart: unless-stopped
     container_name: nginx_container
-
-    # # This is the backend server
-    # location /api/ {
-    #     proxy_pass http://host.docker.internal:8000/;
-    # }
-    
-    # # This is the frontend server for regular users
-    # location / {
-    #     proxy_pass http://host.docker.internal:3000/;
-    # }
-
-    # # This is the fronteend server for admin
-    # location /admin_ui/ {
-    #     proxy_pass http://host.docker.internal:5000/;
-    # }
