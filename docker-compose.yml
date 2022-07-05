@@ -18,11 +18,11 @@ services:
     container_name: frontend_admin_container
 
   frontend_user:
-  build: ./Vidscoin/.
-  ports:
-    - 3000:3000
-  restart: unless-stopped
-  container_name: frontend_user_container
+    build: ./Vidscoin/.
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    container_name: frontend_user_container
 
   nginx:
     build: ./custom-nginx/.
