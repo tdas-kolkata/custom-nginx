@@ -10,12 +10,19 @@ services:
     container_name: backend_container
 
 
-  frontend:
+  frontend_admin:
     build: ./vidscoin-react/.
     ports: 
-      - 3000:3000
+      - 4000:3000
     restart: unless-stopped
-    container_name: frontend_container
+    container_name: frontend_admin_container
+
+  frontend_user:
+  build: ./Vidscoin/.
+  ports:
+    - 3000:3000
+  restart: unless-stopped
+  container_name: frontend_user_container
 
   nginx:
     build: ./custom-nginx/.
@@ -26,7 +33,8 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
-      - frontend
+      - frontend_admin
+      - frontend_user
       - backend
     restart: unless-stopped
     container_name: nginx_container
