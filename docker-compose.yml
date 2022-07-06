@@ -30,6 +30,7 @@ services:
       - 80:80
     volumes:
       - /home/dev2/custom-nginx/conf:/etc/nginx/conf.d
+      - /var/vidscoin-react:/var/vidscoin-react
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
