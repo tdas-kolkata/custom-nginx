@@ -17,6 +17,13 @@ services:
     restart: unless-stopped
     container_name: frontend_user_container
 
+  frontend_admin:
+    build: ./vidscoin-react/.
+    ports:
+      - 5000:3000
+    restart: unless-stopped
+    container_name: frontend_admin_container
+
   nginx:
     build: ./custom-nginx/.
     ports:
